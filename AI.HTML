@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGINT OPS</title>
+    <style>
+        /* CSS Reset & Dark Cyberpunk Theme */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+
+        body {
+            background-color: #0b0d12;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #00ff66;
+            border-radius: 50%;
+
+        }
+
+        .shield-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #12151d;
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid #1e2330;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #00ff66;
+        }
+
+        .secure-btn {
+            background-color: transparent;
+            border: 1px solid #00ff66;
+            color: #00ff66;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .secure-btn span {
+            color: #00ff66;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        /* Main Section (Radar & Stats) */
+        .main-section {
+            background-color: #12151d;
+            border: 1px solid #1e2330;
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .radar-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .radar {
+            width: 180px;
+            height: 180px;
+            border: 2px solid #00ff66;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle, rgba(0, 255, 102, 0.1) 0%, rgba(11, 13, 18, 0.8) 80%);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+        }
+
+        .radar::before,
+        .radar::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(0, 255, 102, 0.3);
+        }
+
+        .radar::before {
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+        }
+
+        .radar::after {
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+        }
+
+        .sweep {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg at 50% 50%, rgba(0, 255, 102, 0.4) 0deg, transparent 60deg);
+            animation: spin 4s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .radar-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .stat-group .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ff66;
+        }
+
+        .stat-group .label {
+            font-size: 0.75rem;
+            color: #8b9bb4;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        /* Button Section (Action buttons) */
+        .buutton-section {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background-color: #12151d;
+            border: 1px solid #2a3245;
+            color: #c5d1e8;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            border-color: #00ff66;
+            color: #00ff66;
+            border-radius: 30%
+        }
+
+        /* Update Section (Cards) */
+        .update-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .update-card {
+            background-color: #12151d;
+            border: 1px solid #1e2330;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 110px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* הדרישה שלך: כשעוברים עם העכבר על העדכונים הם גדלים קצת */
+        .update-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 102, 0.15);
+            border-color: #00ff66;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .badge.critical {
+            background-color: #ff334b;
+            color: #fff;
+        }
+
+        .badge.high {
+            background-color: #ffbb00;
+            color: #000;
+        }
+
+        .badge.medium {
+            background-color: #00ff66;
+            color: #000;
+        }
+
+        .card-status {
+            font-size: 0.7rem;
+            color: #728096;
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #e1e7ef;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #222836;
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #00ff66;
+        }
+
+        .progress-fill.red {
+            background-color: #ff334b;
+        }
+
+        .progress-percentage {
+            font-size: 0.65rem;
+            color: #728096;
+        }
+
+        .card-footer-info {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Red Section (Threat Detected) */
+        .red-section {
+            width: 100%;
+        }
+
+        .red-button {
+            width: 100%;
+            background-color: rgba(255, 51, 75, 0.1);
+            border: 1px solid #ff334b;
+            color: #ff334b;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .red-button::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: #ff334b;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ff334b;
+        }
+
+        /* Footer Navigation Bar */
+        footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #12151d;
+            border-top: 1px solid #1e2330;
+            padding: 12px 0;
+            margin-top: 30px;
+            border-radius: 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #6c7a92;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-item.active {
+            color: #00ff66;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <header>
+        <div class="logo-area">
+            <img src="power.png" alt="Shield Icon" class="shield-icon">
+
+        </div>
+        <h1>SIGINT OPS</h1>
+        <button class="secure-btn"> <span>&bull;</span> SECURE &bull; ONLINE </button>
+    </header>
+
+    <main class="main-container">
+
+        <section class="main-section">
+            <div class="radar-wrapper">
+                <div class='radar'>
+                    <div class='sweep'></div>
+                </div>
+                <div class="radar-stats">
+                    <div class="stat-group">
+                        <div class="number">24</div>
+                        <div class="label">ACTIVE SIGNALS</div>
+                    </div>
+
+                    <div class="stat-group" style="margin-top: 15px;">
+                        <div class="number" style="color: #00ff66;">07</div>
+                        <div class="label">PRIORITY ALERTS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="buutton-section">
+            <button class="action-btn">⚡ New Brief</button>
+            <button class="action-btn">&lt;&gt; Decode</button>
+            <button class="action-btn">📡 Request Drone</button>
+        </section>
+
+        <section class="update-section">
+            <!-- כרטיס 1 -->
+            <div class="update-card">
+
+                <div class="card-header">
+                    <span class="badge critical">CRITICAL</span>
+                    <span class="card-status">In Progress</span>
+                </div>
+
+                <div class="card-title">Operation Nightfall</div>
+
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">65%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill red" style="width: 65%; height: 3px; border-radius: 2px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כרטיס 2 -->
+            <div class="update-card">
+                <div class="card-header">
+                    <span class="badge high">HIGH</span>
+                    <span class="card-status">Analyzing</span>
+                </div>
+                <div class="card-title">Signal Intercept Alpha</div>
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">40%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill"
+                            style="width: 40%; height: 3px; border-radius: 2px; background-color: #ffbb00;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כרטיס 3 -->
+            <div class="update-card">
+                <div class="card-header">
+                    <span class="badge medium">MEDIUM</span>
+                    <span class="card-status">Pending</span>
+                </div>
+                <div class="card-title">Asset Recovery</div>
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">15%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill"
+                            style="width: 15%; height: 3px; border-radius: 2px; background-color: #00ff66;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כרטיס 4 -->
+            <div class="update-card">
+                <div class="card-header">
+                    <span class="badge high">HIGH</span>
+                    <span class="card-status">Active</span>
+                </div>
+                <div class="card-title">Cyber Defense Grid</div>
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">80%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill"
+                            style="width: 80%; height: 3px; border-radius: 2px; background-color: #00ff66;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="red-section">
+            <button class="red-button">THREAT DETECTED</button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="nav-item active">
+            <span>📈</span>
+            <span>Dashboard</span>
+        </div>
+
+        <div class="nav-item">
+            <span>📡</span>
+            <span>Feed</span>
+        </div>
+
+        <div class="nav-item">
+            <span>📄</span>
+            <span>Brief</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>
