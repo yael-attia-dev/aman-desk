@@ -1,7 +1,10 @@
 * {
     padding: 0%;
     margin: 0%;
+    background-color: #111;
+
 }
+
 
 /*
 html {  
@@ -16,29 +19,26 @@ html {
 */
 
 
-
 /*------------------הקויינטר המרכזי- מרכז העמוד והמידע ----------------------*/
 .main-container {
-
     display: grid;
-
     grid-template-columns: 15% 1fr 15%;
     grid-template-rows: 3% 1fr 3%;
     grid-template-areas:
         "header  header  header"
         "sidebar main    sidebar "
         "footer  footer  footer";
+    gap: 10px;
+}
 
-
+.header{
+    display: flex;
+    justify-content: space-around;
 }
 
 
 
-
 /*------------------הקויינטר המרכזי- מרכז העמוד והמידע ----------------------*/
-
-
-
 .radar,
 .sweep {
     position: absolute;
@@ -82,3 +82,9 @@ html {
 }
 
 
+.red-button {
+    color: #C12A51;
+    border: 2px solid #C12A51;
+
+
+}

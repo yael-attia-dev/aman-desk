@@ -11,42 +11,139 @@
 
 <body>
 
+    <body>
+
     <header>
-
-        <H1>SIGINT OP</H1>
-
-        <button class=""> &bull; Securt &bullet; Online </button>
-
-
+        <h1>SIGINT OPS</h1>
+        <button class="secure-btn"> <span>&bull;</span> SECURE &bull; ONLINE </button>
     </header>
 
     <main class="main-container">
 
         <section class="main-section">
 
-            <div class='radar'>
-                <div class='sweep'></div>
-            </div>
+            <div class="radar-wrapper">
+                
+                <div class='radar'>
+                    <div class='sweep'></div>
+                </div>
 
+                <div class="radar-stats">
+
+                    <div class="stat-group">
+                        <div class="number">24</div>
+                        <div class="label">ACTIVE SIGNALS</div>
+                    </div>
+
+                    <div class="stat-group" style="margin-top: 15px;">
+                        <div class="number" style="color: #00ff66;">07</div>
+                        <div class="label">PRIORITY ALERTS</div>
+                    </div>
+
+                </div>
+            </div>
         </section>
 
         <section class="buutton-section">
-            
-
+            <button class="action-btn">⚡ New Brief</button>
+            <button class="action-btn">&lt;&gt; Decode</button>
+            <button class="action-btn">📡 Request Drone</button>
         </section>
 
         <section class="update-section">
+            <!-- כרטיס 1 -->
+            <div class="update-card">
 
+                <div class="card-header">
+                    <span class="badge critical">CRITICAL</span>
+                    <span class="card-status">In Progress</span>
+                </div>
+
+                <div class="card-title">Operation Nightfall</div>
+              
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">65%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill red" style="width: 65%; height: 3px; border-radius: 2px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כרטיס 2 -->
+            <div class="update-card">
+                <div class="card-header">
+                    <span class="badge high">HIGH</span>
+                    <span class="card-status">Analyzing</span>
+                </div>
+                <div class="card-title">Signal Intercept Alpha</div>
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">40%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill" style="width: 40%; height: 3px; border-radius: 2px; background-color: #ffbb00;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כרטיס 3 -->
+            <div class="update-card">
+                <div class="card-header">
+                    <span class="badge medium">MEDIUM</span>
+                    <span class="card-status">Pending</span>
+                </div>
+                <div class="card-title">Asset Recovery</div>
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">15%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill" style="width: 15%; height: 3px; border-radius: 2px; background-color: #00ff66;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- כרטיס 4 -->
+            <div class="update-card">
+                <div class="card-header">
+                    <span class="badge high">HIGH</span>
+                    <span class="card-status">Active</span>
+                </div>
+                <div class="card-title">Cyber Defense Grid</div>
+                <div>
+                    <div class="card-footer-info">
+                        <span class="progress-percentage">80%</span>
+                    </div>
+                    <div class="progress-bar-container" style="background:none;">
+                        <div class="progress-fill" style="width: 80%; height: 3px; border-radius: 2px; background-color: #00ff66;"></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="red-section">
-            <button class="red-button">THEEAT DETECTED</button>
+            <button class="red-button">THREAT DETECTED</button>
         </section>
     </main>
 
     <footer>
+        <div class="nav-item active">
+            <span>📈</span>
+            <span>Dashboard</span>
+        </div>
 
+        <div class="nav-item">
+            <span>📡</span>
+            <span>Feed</span>
+        </div>
+        
+        <div class="nav-item">
+            <span>📄</span>
+            <span>Brief</span>
+        </div>
     </footer>
-</body>
 
+</body>
 </html>
